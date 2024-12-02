@@ -1,3 +1,7 @@
-venv/
+.venv/
 chromedriver.exe
-pruebas.ipynb
+__pycache__/
+pruebas/
+data/
+docs/
+test/
