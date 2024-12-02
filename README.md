@@ -59,7 +59,7 @@ df['x'] = np.where((df['coord_x'] - 24.750) * 6 < 1400,
                       -(df['coord_y'] - 141.25) * 6)
 
 # Tiros realizados por Dzanan Musa durante su temporada de MVP (2021-2022)
-shot_chart(df[df['shot_made']==1],df[df['shot_made']==0])
+shot_chart(df[df['resultado_lanzamiento']==1],df[df['resultado_lanzamiento']==0])
 ```
 ## Dzanan Musa (2021-2022)
 ![Musa](musa2021.png)
