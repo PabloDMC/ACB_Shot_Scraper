@@ -33,6 +33,7 @@ pip install -r requirements.txt
 ## Example
 ```python
 # Instanciar clase.
+from scraper import ScraperACB
 musa = ScraperACB()
 
 # Partidos de Dzanan Musa en la temporada 2021-2022.
@@ -45,10 +46,17 @@ for i in partidos_musa:
 musa.cerrar_driver()
 
 # Conversión a dataframe.
-df = pd.DataFrame(tiros_musa,columns=['nombre','resultado_lanzamiento','x','y'])
+import pandas as pd
+df = pd.DataFrame(tiros_musa, columns=[
+                    'nombre', 'x', 'y', 'cuarto', 'tiempo', 'equipo_local',
+                    'resultado_local', 'resultado_visitante', 'equipo_visitante', 
+                    'descripcion', 'anotado', 'id_partido',
+                    'id_jornada', 'temporada', 'competicion', 'playoff'
+                ])
 
 # Transformacion lineal de las coordenadas de los tiros. 
 import numpy as np
+df = df.astype({'x':'float', 'y':'float'})
 df['coord_x']=df['x']
 df['coord_y']=df['y']
 df['y'] = np.where((df['coord_x'] - 24.750) * 6 < 1400,
@@ -59,7 +67,8 @@ df['x'] = np.where((df['coord_x'] - 24.750) * 6 < 1400,
                       -(df['coord_y'] - 141.25) * 6)
 
 # Tiros realizados por Dzanan Musa durante su temporada de MVP (2021-2022)
-shot_chart(df[df['resultado_lanzamiento']==1],df[df['resultado_lanzamiento']==0])
+from Pista import shot_chart
+shot_chart(df[df['anotado']==True],df[df['anotado']==False])
 ```
 ## Dzanan Musa (2021-2022)
 ![Musa](musa2021.png)
